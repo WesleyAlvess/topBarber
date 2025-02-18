@@ -1,5 +1,6 @@
 import express from 'express'
 import morgan from 'morgan'
+import database from './src/database/database.js'
 
 // Variables
 const app = express()
