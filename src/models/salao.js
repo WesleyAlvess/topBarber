@@ -31,10 +31,26 @@ const salaoSchema = new mongoose.Schema({
         },
     },
     endereco: {
-        cidade: String,
-        numero: Number,
-        pais: String,
-        cep: String,
+        cidade: {
+            type: String,
+            required: [true, 'A cidade do salão é obrigatória'],
+        },
+        numero: {
+            type: Number,
+            required: [true, 'O número do endereço do salão é obrigatório'],
+        },
+        pais: {
+            type: String,
+            required: [true, 'O país do salão é obrigatório'],
+        },
+        cep: {
+            type: String,
+            required: [true, 'O CEP do endereço do salão é obrigatório'],
+            validate: {
+                validator: (cep) => /^(\d{5}-\d{3})$/.test(cep),
+                message: 'CEP inválido, formato esperado: XXXXX-XXX',
+            },
+        },
         uf: String,
     },
     geo: {

@@ -80,6 +80,10 @@ const colaboradorSchema = new mongoose.Schema({
         }
 
     },
+    recipientId: {
+        type: String,
+        required: [true, 'O ID do destinatário do email é obrigatório'],
+    },
     dataCadastro: {
         type: Date,
         default: Date.now,
