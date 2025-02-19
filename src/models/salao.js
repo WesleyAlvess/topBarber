@@ -11,24 +11,12 @@ const salaoSchema = new mongoose.Schema({
     email: {
         type: String,
         required: [true, 'O email do salão é obrigatório'],
-        unique: true,
-        validate: {
-            validator: (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
-            message: 'Email inválido',
-        },
     },
     senha: {
         type: String,
-        default: null,
-        required: [true, 'A senha do salão é obrigatória'],
-        minlength: 8,
     },
     telefone: {
         type: String,
-        validate: {
-            validator: (telefone) => /^\(\d{2}\)\s\d{4,5}-\d{4}$/.test(telefone),
-            message: 'Telefone inválido, formato esperado: (XX) XXXXX-XXXX',
-        },
     },
     endereco: {
         cidade: {
@@ -45,23 +33,18 @@ const salaoSchema = new mongoose.Schema({
         },
         cep: {
             type: String,
-            required: [true, 'O CEP do endereço do salão é obrigatório'],
-            validate: {
-                validator: (cep) => /^(\d{5}-\d{3})$/.test(cep),
-                message: 'CEP inválido, formato esperado: XXXXX-XXX',
-            },
         },
         uf: String,
     },
     geo: {
         type: {
             type: String,
-            enum: ['Point'], // Definindo o tipo como "Point" para dados geoespaciais
+            enum: ['Point'],
             default: 'Point',
         },
         coordinates: {
-            type: [Number], // Espera um array de números (latitude e longitude)
-            index: '2dsphere', // Define um índice geoespacial
+            type: [Number],
+            index: '2dsphere',
         },
     },
     dataCadastro: {
